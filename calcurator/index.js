@@ -26,8 +26,8 @@ const numbers = {
 let one = document.querySelector('#input-number-a');
 let two = document.querySelector('#input-number-b');
 
-function buttonFunc(tag, num) {
-    const button = document.querySelector(tag);
+function buttonFunc(id, num) {
+    const button = document.querySelector(id);
     const val = num
 
     button.addEventListener('click', () => {
@@ -60,8 +60,8 @@ const operators = {
 
 const operator = document.querySelector('#input-sign');
 
-function operatorFunc(tag, oper) {
-    const operation = document.querySelector(tag);
+function operatorFunc(id, oper) {
+    const operation = document.querySelector(id);
     operation.addEventListener('click', () => {
         operator.innerText = oper;
     })
