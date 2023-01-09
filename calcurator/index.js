@@ -9,8 +9,13 @@
 // 1. document.querySelector를 활용해 element를 가져온다.
 // 2. addEventListener를 활용해 클릭 이벤트를 등록한다.
 
+// ==== original existing elements values ====
+const oneOriginalVal = 'number a';
+const twoOriginalVal = 'number b';
+const resultOriginalVal = 'sign';
+
 // ==== button events ====
-const numbers = {
+const numberTags = {
     'zero': '#number-zero',
     'one': '#number-one',
     'two': '#number-two',
@@ -21,44 +26,55 @@ const numbers = {
     'seven': '#number-seven',
     'eight': '#number-eight',
     'nine': '#number-nine',
+
+    'inputNumberA' : '#input-number-a',
+    'inputNumberB' : '#input-number-b'
 };
 
-let one = document.querySelector('#input-number-a');
-let two = document.querySelector('#input-number-b');
+let one = document.querySelector(numberTags.inputNumberA);
+let two = document.querySelector(numberTags.inputNumberB);
 
 function buttonFunc(id, num) {
     const button = document.querySelector(id);
     const val = num
 
     button.addEventListener('click', () => {
-        if (document.querySelector('#input-number-a').innerText === 'number a') {
+        if (one.innerText === oneOriginalVal) {
             one.innerText = val;
-        } else if (document.querySelector('#input-number-b').innerText === 'number b') {
+        } else if (two.innerText === twoOriginalVal) {
             two.innerText = val;
         }
     })
 }
 
-buttonFunc(numbers.zero, 0);
-buttonFunc(numbers.one, 1);
-buttonFunc(numbers.two, 2);
-buttonFunc(numbers.three, 3);
-buttonFunc(numbers.four, 4);
-buttonFunc(numbers.five, 5);
-buttonFunc(numbers.six, 6);
-buttonFunc(numbers.seven, 7);
-buttonFunc(numbers.eight, 8);
-buttonFunc(numbers.nine, 9);
+
+buttonFunc(numberTags.zero, 0);
+buttonFunc(numberTags.one, 1);
+buttonFunc(numberTags.two, 2);
+buttonFunc(numberTags.three, 3);
+buttonFunc(numberTags.four, 4);
+buttonFunc(numberTags.five, 5);
+buttonFunc(numberTags.six, 6);
+buttonFunc(numberTags.seven, 7);
+buttonFunc(numberTags.eight, 8);
+buttonFunc(numberTags.nine, 9);
 
 // ==== operator ====
-const operators = {
+const operatorTags = {
     'add': '#sign-plus',
     'minus': '#sign-minus',
     'multiple': '#sign-multiple',
-    'divide': '#sign-divide',
+    'divide': '#sign-divide'
+}
+const operators = {
+    'add': '+',
+    'minus': '-',
+    'multiple': '*',
+    'divide': '/'
 }
 
-const operator = document.querySelector('#input-sign');
+const inputSign = '#input-sign'
+const operator = document.querySelector(inputSign);
 
 function operatorFunc(id, oper) {
     const operation = document.querySelector(id);
@@ -67,13 +83,14 @@ function operatorFunc(id, oper) {
     })
 }
 
-operatorFunc(operators.add, "+");
-operatorFunc(operators.minus, "-");
-operatorFunc(operators.multiple, "*");
-operatorFunc(operators.divide, "/");
+operatorFunc(operatorTags.add, operators.add);
+operatorFunc(operatorTags.minus, operators.minus);
+operatorFunc(operatorTags.multiple, operators.multiple);
+operatorFunc(operatorTags.divide, operators.divide);
 
 
 // ==== result  ====
+const inputResult = '#input-result';
 const calculator = document.querySelector('#sign-equal');
 
 calculator.addEventListener('click', () => {
@@ -81,15 +98,20 @@ calculator.addEventListener('click', () => {
     const twoVal = two.innerText;
     const operatorVal = operator.innerText;
 
-    if (!(oneVal === 'number a') && !(twoVal === 'number b') && !(operatorVal === 'sign')) {
-        const result = document.querySelector('#input-result')
-        if (operatorVal === "+") {
+    const isValidCondition = !(oneVal === oneOriginalVal) && 
+                             !(twoVal === twoOriginalVal) && 
+                             !(operatorVal === resultOriginalVal)
+
+    if (isValidCondition) {
+        const result = document.querySelector(inputResult);
+
+        if (operatorVal === operators.add) {
             result.innerText = Number(oneVal) + Number(twoVal);
-        } else if (operatorVal === "-") {
+        } else if (operatorVal === operators.minus) {
             result.innerText = Number(oneVal) - Number(twoVal);
-        } else if (operatorVal === "*") {
+        } else if (operatorVal === operators.multiple) {
             result.innerText = Number(oneVal) * Number(twoVal);
-        } else if (operatorVal === "/") {
+        } else if (operatorVal === operators.divide) {
             result.innerText = Number(oneVal) / Number(twoVal);
         }
     }
